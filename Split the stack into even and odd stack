@@ -1,0 +1,132 @@
+#include <stdio.h>
+#define Max 10
+
+int top = -1;
+int stack[Max];
+
+int isEmpty()
+{
+    if(top==-1)
+{
+	return 1;
+	    } else
+    {
+	return 0;
+    }
+}
+
+
+int isFull()
+ {
+    if(top == Max-1)
+     {
+	return 1;
+    } else
+     {
+	return 0;
+    }
+}
+
+
+void push(int x)
+ {
+    if(isFull())
+    {
+	printf("Stack is full");
+    } else
+    {
+	top++;
+	stack[top] = x;
+    }
+}
+
+
+void pop()
+{
+    int element;
+    if(isEmpty())
+ {
+	printf("Stack is Empty");
+
+    } else
+    {
+	top--;
+    }
+  }
+
+void main()
+{
+    int i , j , k , m ;
+    int oddStack[Max];
+    int evenStack[Max];
+    int altStack[Max];
+    int t1 , t2;
+
+    int oddTop = -1, evenTop = -1, altTop=-1;
+
+    printf("please enter 10 integers \n");
+    for(i =0;i<Max;i++)
+    {
+    scanf("%d",&m);
+    push(m);
+    }
+
+    for(i = 0; i< Max; i++)
+	{
+	if(stack[top]%2 !=0)
+	    {
+	    oddTop++;
+	    oddStack[oddTop] = stack[top];
+	    pop();
+	    }
+
+    else
+       {
+	 evenTop++;
+	 evenStack[evenTop] = stack[top];
+	 pop();
+	}
+    }
+
+   t1=evenTop,t2=oddTop;
+
+   while(t1!=-1 and t2!=-1)
+    {
+	 altTop++;
+	 altStack[altTop]=evenStack[t1--];
+	 altTop++;
+	 altStack[altTop]=oddStack[t2--];
+	}
+
+   while(t1>=0)
+    {
+     altTop++;
+     altStack[altTop]=evenStack[t1--];
+     }
+
+    while(t2>=0)
+   {
+      altTop++;
+      altStack[altTop]=oddStack[t2--];
+    }
+
+    printf("Odd Stack values are \n");
+    for(j =0; j<=oddTop; j++)
+    {
+    printf("%d \n",oddStack[j] );
+    }
+
+    printf("Even Stack values are \n");
+
+    for(k =0; k<=evenTop; k++)
+    {
+    printf("%d \n",evenStack[k] );
+    }
+
+
+     printf("Even Odd Alternate Stack values are \n");
+    for(j =0; j<=altTop; j++) 
+    {
+    printf("%d \n",altStack[j] );
+    }
+  }
