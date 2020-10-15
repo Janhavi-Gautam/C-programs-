@@ -1,0 +1,56 @@
+#include<stdio.h>
+#include<stdlib.h>
+#define MAX 50
+
+int queue[MAX] , rear = - 1, front = - 1;
+
+void insertion(int num)
+{
+      if (rear == MAX - 1)
+            printf("Queue Overflow \n");
+      else if (front == -1 && rear == -1)
+            {
+                front = rear= 0;
+            }
+       else 
+            rear++;
+        queue[rear] = num;
+}
+
+void display()
+{
+    int i;
+    for(i=front;i<=rear;i++)
+    {
+        printf("\n%d",queue[i]);
+    }
+}
+void reverse()
+{
+    int i,j,t;
+    for(i=front,j=rear;i<j;i++,j--)
+    {
+        t = queue[i];
+        queue[i] = queue[j];
+        queue[j] = t;
+    }
+}
+void main()
+{
+    int n,i=0,t;
+    printf("Enter the size of Queue");
+    scanf("%d",&n);
+    printf("\nEnter the data for Queue");
+    while(i<n)
+    {
+        scanf("%d",&t);
+        insertion(t);
+        i++;
+    }
+    printf("\nQueue entered:\n");
+    display();
+    reverse();
+    printf("\nQueue after reversing:\n");
+    display();
+    
+} 
