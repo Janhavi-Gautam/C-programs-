@@ -1,0 +1,40 @@
+#include<stdio.h>
+int main()
+{
+    	int r , c, i , j,sum=0, product[50][50],a[50][50],b[50][50];
+    
+    	printf("Enter the number of rows and columns of first matrix:");
+    	scanf("%d%d",&r,&c);
+         printf("Enter the elements of first matrix:");
+    	for(i=0;i<r;i++)
+       	    for(j=0;j<c;j++)
+            	{
+           	 scanf("%d",a[i][j]);
+            	}
+          printf("Enter the number of rows and columns of second matrix:");
+          scanf("%d%d",&r,&c);   
+          printf("Enter the elements of second matrix:");
+           for(i=0;i<r;i++)
+               for(j=0;j<c;j++)
+                    {
+                    scanf("%d",b[i][j]); 
+                     }
+        	if(c!=r)
+        	printf("The multiplication of the two matrix is not possible\n");
+       	 else
+        	{  
+            for(i=0;i<r;i++)
+            	for(j=0;j<c;j++)
+            	{
+                    sum =sum + a[i][k]*b[k][j];
+            	}
+            product[i][j] = sum;
+        	}        
+       	 printf("\n Product of two matrix \n");
+        	 for(i=0;i<r;i++)
+        	     for(j=0;j<c;j++)
+           	 {
+           	 printf("%d\t",product[i][j]);
+           	 printf("/n");
+            	}  
+}
