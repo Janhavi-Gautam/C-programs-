@@ -1,0 +1,97 @@
+#include <stdio.h>
+
+int queue[50];
+int stack[50];
+int front=-1, rear=-1, top=-1;
+
+void enqueue(int item,int l)
+{
+    if(rear==l-1)
+    {
+        printf("Queue is full");
+    }
+    else if(front==-1 && rear==-1)
+    {
+        front= rear = 0;
+        queue[rear] = item;
+    }
+    else
+    {
+        rear++;
+        queue[rear] = item;
+    }
+}
+
+int dequeue()
+{
+    int item=0;
+    if(front==-1)
+    {
+        printf("Queue is empty");
+    }
+    else
+    {
+        item=queue[front];
+        front++;
+    }
+    return item;
+}
+
+int push(int item,int n)
+{
+    if(top!=n)
+    {
+        top = top + 1;   
+        stack[top] = item;
+    }
+    else
+    {
+      printf("Stack is full.\n");
+   }
+}
+
+int pop()
+{
+    int item;
+    if(top!=-1)
+    {
+        item = stack[top];
+        top = top - 1;   
+        return item;
+    }
+    else
+    {
+        printf("Stack is empty.\n");
+   }
+}
+
+int main() 
+{
+    int val=0,n=0;
+    
+    scanf("%d",&n);
+    printf("Size of queue : %d\n",n);
+    
+    for(int i=0; i<n; i++){
+        scanf("%d",&val);
+        enqueue(val,n);
+    }
+	while(front<=rear)
+    {
+	    int p=dequeue();
+	    push(p,n);
+	}
+	front =rear =-1;
+
+	for(int i=0; i<n; i++)
+    {
+	    int x=pop();
+	    enqueue(x,n);
+	}
+	printf("Reversed Queue is :\n");
+	for(int i=0; i<n; i++){
+	    int prnt=dequeue();
+	    printf("%d\n",prnt);
+	}
+	return 0;
+}
