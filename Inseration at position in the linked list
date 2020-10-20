@@ -1,0 +1,75 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct Node {
+int data;
+struct Node* next;
+};
+
+void add_at_pos(struct Node *first , int data, int pos)
+{
+    struct Node *ptr=first;
+    struct Node *ptr2=(struct Node*)malloc(sizeof(struct Node));
+    ptr2->data=data;
+    ptr2->next=NULL;
+
+    ptr=first;
+    for(int i=0;i<=pos-1;i++)
+    {
+        ptr=ptr->next;
+        if(ptr==NULL)
+        break;
+    }
+    if(ptr!=NULL)
+    ptr2->next=ptr->next;
+    ptr->next=ptr2;
+    
+}
+
+int main()
+{
+int i,n,m,data,pos;
+struct Node *first= NULL;
+struct Node *newnode = NULL;
+struct Node *temp = NULL;
+printf("Enter the number of node you want:\n");
+scanf("%d",&m);
+
+first = (struct Node*)malloc(sizeof(struct Node));
+printf("Enter the element:\n");
+scanf("%d",&n);
+
+first->data = n;
+first->next = NULL;
+temp = first;
+for (i=0;i<m;i++)
+{
+newnode = (struct Node*)malloc(sizeof (struct Node));
+printf("Enter the element:\n");
+scanf("%d",&n);
+newnode->data = n;
+newnode->next = NULL;
+if (first->next == NULL)
+{
+first->next = newnode;
+temp = newnode;
+}
+else
+{
+temp->next = newnode;
+temp = newnode;
+}
+}
+printf("Enter the position:\n");
+scanf("%d",&pos);
+printf("Enter the data:\n");
+scanf("%d",&data);
+
+add_at_pos(first, data,pos);
+struct Node *ptr=first;
+while(ptr!=NULL)
+{
+    printf("%d",ptr->data);
+    ptr=ptr->next;
+}
+return 0;
+}
