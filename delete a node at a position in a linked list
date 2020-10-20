@@ -1,0 +1,106 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node
+{
+int data;
+struct Node* next;
+};
+
+struct Node *del_pos(struct Node* first, int pos)
+{
+    int i;
+    struct Node *ptr, *ptr1;
+
+    if(first == NULL)
+    {
+        printf("Empty Linked List\n");
+    }
+    else
+    {
+        ptr = first;
+        ptr1 = first;
+
+        for(i=1; i<=pos; i++)
+        {
+            ptr1 = ptr;
+            ptr = ptr->next;
+
+            if(ptr == NULL)
+                break;
+        }
+
+        if(ptr != NULL)
+        {
+            if(ptr == first)
+                first = first->next;
+
+            ptr1->next = ptr->next;
+            ptr->next = NULL;
+
+          
+  free(ptr);
+        }
+        else
+        {
+            printf("Invalid position \n");
+        }
+    }
+}
+
+void print_data(struct Node *first)
+{
+    if(first==NULL)
+    printf("Linked List is empty\n");
+    struct Node *ptr=NULL;
+    ptr=first;
+    while(ptr!=NULL)
+    {
+        printf("%d",ptr->data);
+        ptr=ptr->next;
+    }
+}
+
+
+int main()
+{
+int i,n,m,data,pos;
+struct Node *first= NULL;
+struct Node *newnode = NULL;
+struct Node *temp = NULL;
+printf("Enter the number of node you want:\n");
+scanf("%d",&m);
+
+first = (struct Node*)malloc(sizeof(struct Node));
+printf("Enter the element:\n");
+scanf("%d",&n);
+first->data = n;
+first->next = NULL;
+temp = first;
+for (i=0;i<m;i++)
+{
+newnode = (struct Node*)malloc(sizeof (struct Node));
+printf("Enter the element:\n");
+scanf("%d",&n);
+newnode->data = n;
+newnode->next = NULL;
+if (first->next == NULL)
+{
+first->next = newnode;
+temp = newnode;
+}
+else
+{
+temp->next = newnode;
+temp = newnode;
+}
+}
+    struct Node *ptr;
+    printf("Enter the position:\n");
+    scanf("%d",&pos);
+
+    del_pos(first,pos);
+    printf("After deletion of linked list from a given position \n");
+    print_data(first);
+return 0;
+}
