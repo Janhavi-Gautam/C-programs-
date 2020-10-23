@@ -1,0 +1,92 @@
+            7
+           /  \
+          2    8
+           \     \
+            4     12 
+           /  \     \ 
+          3    6     15
+
+
+
+
+#include <stdio.h>
+#include<stdlib.h>
+
+struct Node
+{
+    int data;
+    struct Node *leftChild;
+    struct Node *rightChild;
+};
+struct Node *newNode(int data)
+{
+    struct Node* node =(struct Node*)malloc(sizeof(struct Node));
+
+   node->data = data;
+   node->leftChild = NULL;
+   node->rightChild = NULL;
+    return(node);
+}
+void preOrder(struct Node *root)
+{
+    if(root == NULL)
+        return;
+    printf("%d\n",root->data);
+    preOrder(root->leftChild);
+    preOrder(root->rightChild);
+}
+
+void inOrder(struct Node *root)
+{
+if(root == NULL)
+return;
+inOrder(root-> leftChild);
+printf("%d\n", root-> data);
+inOrder(root-> rightChild);
+}
+
+void postOrder(struct Node *root)
+{
+if(root == NULL)
+return;
+postOrder(root -> leftChild);
+postOrder(root -> rightChild);
+printf("%d\n",root->data);
+}
+
+struct Node *insert(struct Node *node, int data)
+{
+  if (node == NULL)
+  return newNode(data);
+  if (data < node->data)
+  node->leftChild = insert(node->leftChild, data);
+  else
+  node->rightChild = insert(node->rightChild,data);
+  return node;
+}
+
+
+int main()
+{
+    struct Node *root = NULL;
+    
+      root = insert(root, 7);
+      root = insert(root, 2);
+      root = insert(root, 4);
+      root = insert(root, 8);
+      root = insert(root, 12);
+      root = insert(root, 15);
+      root = insert(root, 3);
+      root = insert(root, 6);
+    
+    
+    printf("Preorder:");
+    preOrder(root);
+    printf("Inorder:");
+    inOrder(root);
+    printf("Postorder:");
+    postOrder(root);
+    
+    getchar();
+    return 0;
+}
