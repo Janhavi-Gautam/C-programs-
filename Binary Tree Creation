@@ -1,0 +1,60 @@
+#include <stdio.h>
+#include<stdlib.h>
+
+struct Node
+{
+    int data;
+    struct Node *leftChild;
+    struct Node *rightChild;
+};
+struct Node *newNode(int data)
+{
+    struct Node* node =(struct Node*)malloc(sizeof(struct Node));
+
+   node->data = data;
+   node->leftChild = NULL;
+   node->rightChild = NULL;
+    return(node);
+}
+void preOrder(struct Node *root)
+{
+    if(root == NULL)
+        return;
+    printf("%d\n",root->data);
+    preOrder(root->leftChild);
+    preOrder(root->rightChild);
+}
+
+void inOrder(struct Node *root)
+{
+if(root == NULL)
+return;
+inOrder(root-> leftChild);
+printf("%d\n", root-> data);
+inOrder(root-> rightChild);
+}
+
+void postOrder(struct Node *root)
+{
+if(root == NULL)
+return;
+postOrder(root -> leftChild);
+postOrder(root -> rightChild);
+printf("%d\n",root->data);
+}
+int main()
+{
+    struct Node *root = newNode(5);
+    root->leftChild = newNode(7);
+    root->rightChild = newNode(12);
+    root->leftChild->leftChild= newNode(3);
+    printf("Preorder:");
+    preOrder(root);
+    printf("Inorder:");
+    inOrder(root);
+    printf("Inorder:");
+    postOrder(root);
+    
+    getchar();
+    return 0;
+}
